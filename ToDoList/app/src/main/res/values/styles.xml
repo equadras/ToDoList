@@ -1,0 +1,10 @@
+<resources>
+    <!-- Tema Principal -->
+    <style name="Theme.TodoList" parent="Theme.AppCompat">
+        <!-- Personalize as cores do seu aplicativo aqui -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="colorAccent">@color/teal_200</item>
+    </style>
+</resources>
+
