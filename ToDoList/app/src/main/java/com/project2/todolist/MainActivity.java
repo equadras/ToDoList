@@ -12,6 +12,8 @@ import com.project2.todolist.models.Goal;
 import com.project2.todolist.network.GoalApi;
 import com.project2.todolist.network.RetrofitClient;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +37,23 @@ public class MainActivity extends AppCompatActivity {
         etGoal = findViewById(R.id.etGoal);
         rvGoals = findViewById(R.id.rvGoals);
 
-        // Configurar o RecyclerView
-        rvGoals.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new GoalAdapter(new ArrayList<>());
-        rvGoals.setAdapter(adapter);
-
         // Inicializar Retrofit
         goalApi = RetrofitClient.getInstance().create(GoalApi.class);
+
+        adapter = new GoalAdapter(new ArrayList<>(), new GoalAdapter.OnGoalActionListener() {
+            @Override
+            public void onEditGoal(Goal goal) {
+                editGoal(goal);
+            }
+
+            @Override
+            public void onDeleteGoal(Goal goal) {
+                deleteGoal(goal);
+            }
+        });
+        // Configurar o RecyclerView
+        rvGoals.setLayoutManager(new LinearLayoutManager(this));
+        rvGoals.setAdapter(adapter);
 
         // Carregar os goals ao abrir o app
         loadGoals();
@@ -54,11 +66,52 @@ public class MainActivity extends AppCompatActivity {
                 if (!goalTitle.isEmpty()) {
                     createGoal(new Goal(goalTitle, 3)); // Frequência semanal arbitrária
                 } else {
-                    Toast.makeText(MainActivity.this, "Digite um goal!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Escreva um objetivo!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+    private void editGoal(Goal goal) {
+        goalApi.updateGoal(goal.getId(), goal).enqueue(new Callback<Goal>() {
+            @Override
+            public void onResponse(Call<Goal> call, Response<Goal> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Objetivo atualizado!", Toast.LENGTH_SHORT).show();
+                    loadGoals();
+                } else {
+                    Toast.makeText(MainActivity.this, "Erro ao atualizar objetivo", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Goal> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Erro de conexão", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void deleteGoal(Goal goal) {
+        goalApi.deleteGoal(goal.getId()).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Objetivo removido!", Toast.LENGTH_SHORT).show();
+                    loadGoals(); // Atualizar a lista de objetivos
+                } else {
+                    Toast.makeText(MainActivity.this, "Erro ao remover objetivo", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Erro de conexão", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
 
     // Método para carregar todos os goals da API
     private void loadGoals() {
@@ -68,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     adapter.updateGoals(response.body());
                 } else {
-                    Toast.makeText(MainActivity.this, "Erro ao carregar goals", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Erro ao carregar os objetivos", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -85,11 +138,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Goal> call, Response<Goal> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Goal adicionado!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Objetivo adicionado!", Toast.LENGTH_SHORT).show();
                     loadGoals(); // Atualizar a lista de goals
                     etGoal.setText("");
                 } else {
-                    Toast.makeText(MainActivity.this, "Erro ao adicionar goal", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Erro ao adicionar objetivo", Toast.LENGTH_SHORT).show();
                 }
             }
 

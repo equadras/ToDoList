@@ -4,6 +4,7 @@ import com.trabalho.main.model.Goal;
 import com.trabalho.main.model.GoalCompletion;
 import com.trabalho.main.service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,6 +40,20 @@ public class GoalController {
         completion.setGoal(goal);
 
         return goalService.completeGoal(completion);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Goal> updateGoal(@PathVariable String id, @RequestBody Goal updatedGoal) {
+        Goal existingGoal = goalService.getGoalById(id); // Assumindo que o GoalService tem esse método.
+
+        if (existingGoal != null) {
+            existingGoal.setTitle(updatedGoal.getTitle());
+            existingGoal.setDesiredWeeklyFrequency(updatedGoal.getDesiredWeeklyFrequency());
+            Goal savedGoal = goalService.updateGoal(existingGoal);
+            return ResponseEntity.ok(savedGoal);
+        } else {
+            return ResponseEntity.notFound().build(); // Retorna 404 se o objetivo não for encontrado.
+        }
     }
 
     @GetMapping("/completions")

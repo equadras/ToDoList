@@ -22,3 +22,4 @@ class ExampleInstrumentedTest {
         assertEquals("com.project2.todolist", appContext.packageName)
     }
 }
+

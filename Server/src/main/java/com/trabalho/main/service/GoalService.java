@@ -34,6 +34,14 @@ public class GoalService {
         return goalCompletionRepository.save(goalCompletion);
     }
 
+    public Goal getGoalById(String id) {
+        return goalRepository.findById(id).orElse(null);
+    }
+
+    public Goal updateGoal(Goal goal) {
+        return goalRepository.save(goal);
+    }
+
     public List<GoalCompletion> getAllCompletions() {
         return goalCompletionRepository.findAll();
     }
