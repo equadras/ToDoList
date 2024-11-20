@@ -4,15 +4,12 @@ public class Goal {
     private String id;
     private String title;
     private int desiredWeeklyFrequency;
+    private boolean isEditing; // Propriedade para controlar o estado de edição (frontend)
 
-    // Construtor padrão (necessário para Retrofit e Gson)
-    public Goal() {
-    }
-
-    // Construtor com argumentos
     public Goal(String title, int desiredWeeklyFrequency) {
         this.title = title;
         this.desiredWeeklyFrequency = desiredWeeklyFrequency;
+        this.isEditing = false;
     }
 
     // Getters e Setters
@@ -38,5 +35,13 @@ public class Goal {
 
     public void setDesiredWeeklyFrequency(int desiredWeeklyFrequency) {
         this.desiredWeeklyFrequency = desiredWeeklyFrequency;
+    }
+
+    public boolean isEditing() {
+        return isEditing;
+    }
+
+    public void setEditing(boolean editing) {
+        isEditing = editing;
     }
 }
