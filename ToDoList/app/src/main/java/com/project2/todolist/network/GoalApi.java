@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -24,4 +25,7 @@ public interface GoalApi {
 
     @DELETE("/api/goals/{id}")
     Call<Void> deleteGoal(@Path("id") String id);
+
+   @HTTP(method = "PATCH", path = "/api/goals/{id}/toggle-completion", hasBody = true)
+    Call<Goal> toggleGoalCompletion(@Path("id") String id, @Body Goal goal);
 }

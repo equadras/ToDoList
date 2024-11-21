@@ -1,15 +1,21 @@
 package com.project2.todolist.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Goal {
     private String id;
     private String title;
     private int desiredWeeklyFrequency;
     private boolean isEditing; // Propriedade para controlar o estado de edição (frontend)
 
-    public Goal(String title, int desiredWeeklyFrequency) {
+    @SerializedName("completed")
+    private boolean completed;
+
+    public Goal(String title, int desiredWeeklyFrequency, boolean completed) {
         this.title = title;
         this.desiredWeeklyFrequency = desiredWeeklyFrequency;
         this.isEditing = false;
+        this.completed = completed;
     }
 
     // Getters e Setters
@@ -31,6 +37,14 @@ public class Goal {
 
     public int getDesiredWeeklyFrequency() {
         return desiredWeeklyFrequency;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public void setDesiredWeeklyFrequency(int desiredWeeklyFrequency) {

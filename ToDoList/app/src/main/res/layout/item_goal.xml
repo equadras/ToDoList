@@ -5,6 +5,15 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
+    <CheckBox
+        android:id="@+id/cbCompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <!-- Título do objetivo -->
     <TextView
         android:id="@+id/tvTitle"
