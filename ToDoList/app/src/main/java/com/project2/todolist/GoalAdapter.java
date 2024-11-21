@@ -76,7 +76,7 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             if (goal.isCompleted()) {
                 holder.btnSave.setVisibility(View.GONE);
                 holder.btnEdit.setVisibility(View.GONE);
-                holder.btnDelete.setVisibility(View.GONE);
+                holder.btnDelete.setVisibility(View.VISIBLE);
             } else {
                 holder.tvTitle.setVisibility(View.VISIBLE);
                 holder.etTitle.setVisibility(View.GONE);
