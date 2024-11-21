@@ -1,71 +1,105 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tela_principal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp">
+    android:background="#FFFFFF"
+    >
+
+    <!-- Header -->
+    <!-- Cor do header -->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Campo para adicionar novos goals -->
+
+    <View
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="#40076F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/etGoal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Digite seu objetivo"
         android:layout_margin="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"
+        android:hint="Digite seu objetivo"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Botão para adicionar -->
     <Button
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#250440"
+        android:shadowColor="#1D1A1A"
         android:text="Adicionar"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Título para "Não Concluídos" -->
+    <!-- Outros elementos continuam normalmente -->
     <TextView
         android:id="@+id/tvIncompleteGoals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Não Concluídos"
-        android:textSize="18sp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="Não Concluídos"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#40076F"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
 
-    <!-- RecyclerView para Não Concluídos -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvIncompleteGoals"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
+        android:textColor="#40076F"
         app:layout_constraintBottom_toTopOf="@+id/tvCompletedGoals"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvIncompleteGoals" />
 
-    <!-- Título para "Concluídos" -->
     <TextView
         android:id="@+id/tvCompletedGoals"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:text="Concluídos"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/rvIncompleteGoals"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textStyle="bold"
+        android:textColor="#40076F"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvIncompleteGoals" />
 
-    <!-- RecyclerView para Concluídos -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCompletedGoals"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
-        app:layout_constraintTop_toBottomOf="@+id/tvCompletedGoals"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="200dp"
+        android:textColor="#40076F"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCompletedGoals"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

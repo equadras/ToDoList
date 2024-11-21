@@ -62,6 +62,8 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             }
         });
 
+        
+
         // Modo de edição
         if (goal.isEditing()) {
             holder.tvTitle.setVisibility(View.GONE);
@@ -69,11 +71,19 @@ public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder
             holder.etTitle.setText(goal.getTitle());
             holder.btnSave.setVisibility(View.VISIBLE);
             holder.btnEdit.setVisibility(View.GONE);
+            holder.btnDelete.setVisibility(View.GONE);
         } else {
-            holder.tvTitle.setVisibility(View.VISIBLE);
-            holder.etTitle.setVisibility(View.GONE);
-            holder.btnSave.setVisibility(View.GONE);
-            holder.btnEdit.setVisibility(View.VISIBLE);
+            if (goal.isCompleted()) {
+                holder.btnSave.setVisibility(View.GONE);
+                holder.btnEdit.setVisibility(View.GONE);
+                holder.btnDelete.setVisibility(View.GONE);
+            } else {
+                holder.tvTitle.setVisibility(View.VISIBLE);
+                holder.etTitle.setVisibility(View.GONE);
+                holder.btnSave.setVisibility(View.GONE);
+                holder.btnEdit.setVisibility(View.VISIBLE);
+                holder.btnDelete.setVisibility(View.VISIBLE);
+            }
         }
 
         holder.btnEdit.setOnClickListener(v -> {
