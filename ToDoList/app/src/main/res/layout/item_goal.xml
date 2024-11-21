@@ -48,9 +48,9 @@
         android:id="@+id/btnEdit"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:backgroundTint="#40076F"
+        android:backgroundTint="#0040076F"
         android:src="@drawable/ic_edit"
-        android:tint="#FFFFFF"
+        android:tint="#40076F"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,10 +60,10 @@
         android:id="@+id/btnSave"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:backgroundTint="#40076F"
+        android:backgroundTint="#0040076F"
         android:src="@drawable/ic_save"
-        android:tint="#FFFFFF"
-        android:visibility="visible"
+        android:tint="#40076F"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,9 +73,9 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="#40076F"
+        android:backgroundTint="#0040076F"
         android:src="@drawable/ic_delete"
-        android:tint="#FFFFFF"
+        android:tint="#40076F"
         android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/btnEdit"
         app:layout_constraintTop_toTopOf="parent" />
