@@ -23,6 +23,7 @@ public class GoalController {
 
     @PostMapping
     public Goal createGoal(@RequestBody Goal goal) {
+        goal.setCompleted(false); // Garante que o campo é inicializado corretamente
         return goalService.createGoal(goal);
     }
 
@@ -53,6 +54,19 @@ public class GoalController {
             return ResponseEntity.ok(savedGoal);
         } else {
             return ResponseEntity.notFound().build(); // Retorna 404 se o objetivo não for encontrado.
+        }
+    }
+
+    @PatchMapping("/{id}/toggle-completion")
+    public ResponseEntity<Goal> toggleGoalCompletion(@PathVariable String id, @RequestBody Goal goal) {
+        Goal existingGoal = goalService.getGoalById(id);
+
+        if (existingGoal != null) {
+            existingGoal.setCompleted(goal.isCompleted());
+            Goal updatedGoal = goalService.updateGoal(existingGoal);
+            return ResponseEntity.ok(updatedGoal);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

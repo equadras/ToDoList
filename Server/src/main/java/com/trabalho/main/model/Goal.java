@@ -20,6 +20,9 @@ public class Goal {
     @Column(name = "desired_weekly_frequency", nullable = false)
     private int desiredWeeklyFrequency;
 
+    @Column(name = "completed", nullable = false)
+    private boolean completed;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private ZonedDateTime createdAt = ZonedDateTime.now();
 
@@ -46,6 +49,14 @@ public class Goal {
 
     public void setDesiredWeeklyFrequency(int desiredWeeklyFrequency) {
         this.desiredWeeklyFrequency = desiredWeeklyFrequency;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public ZonedDateTime getCreatedAt() {
