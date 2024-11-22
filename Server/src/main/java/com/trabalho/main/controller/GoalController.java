@@ -1,7 +1,6 @@
 package com.trabalho.main.controller;
 
 import com.trabalho.main.model.Goal;
-import com.trabalho.main.model.GoalCompletion;
 import com.trabalho.main.service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,17 +31,6 @@ public class GoalController {
         goalService.deleteGoal(id);
     }
 
-    @PostMapping("/{id}/complete")
-    public GoalCompletion completeGoal(@PathVariable String id) {
-        Goal goal = new Goal();
-        goal.setId(id);
-
-        GoalCompletion completion = new GoalCompletion();
-        completion.setGoal(goal);
-
-        return goalService.completeGoal(completion);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Goal> updateGoal(@PathVariable String id, @RequestBody Goal updatedGoal) {
         Goal existingGoal = goalService.getGoalById(id); // Assumindo que o GoalService tem esse método.
@@ -70,8 +58,4 @@ public class GoalController {
         }
     }
 
-    @GetMapping("/completions")
-    public List<GoalCompletion> getAllCompletions() {
-        return goalService.getAllCompletions();
-    }
 }
